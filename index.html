@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayShield FinTech Platform | Enterprise Cloud-Native DevOps Showcase</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+      --bg: #090b10;
+      --card-bg: #111420;
+      --card-border: #1f2538;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-purple: #8b5cf6;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .glass-card {
+      background: rgba(17, 20, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+    }
+
+    .pulse-dot {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.15); }
+    }
+
+    .step-active {
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .step-completed {
+      border-color: #10b981 !important;
+      background-color: rgba(16, 185, 129, 0.1) !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d1017;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #252c40;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Navigation / Top Bar -->
+  <header class="border-b border-slate-800/80 sticky top-0 z-50 bg-[#090b10]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight text-white">PayShield</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-semibold font-mono">v2.4.0</span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-medium">Enterprise FinTech CI/CD Platform</p>
+        </div>
+      </div>
+
+      <!-- Author Identity & Badges -->
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
+          <i class="fa-solid fa-user-shield text-emerald-400 text-xs"></i>
+          <span class="text-xs text-slate-300">Maintainer: <strong class="text-white">Priyanshu (he99codes)</strong></span>
+        </div>
+        <a href="https://github.com/he99codes" target="_blank" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-brands fa-github text-sm"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800/80 shadow-2xl relative overflow-hidden">
+      <!-- Glow Gradients -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="max-w-3xl space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+              Kubernetes Production Cluster: Healthy
+            </span>
+            <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-800/80 text-slate-300 border border-slate-700/60 font-mono">
+              AWS VPC • us-east-1
+            </span>
+            <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">
+              PCI-DSS v4 Compliant
+            </span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            High-Availability FinTech Payment Gateway & Cloud-Native DevOps Infrastructure
+          </h1>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Engineered by <strong>he99codes</strong>. An automated, zero-downtime microservices delivery pipeline connecting 
+            <strong>Jenkins CI</strong>, <strong>Ansible Automation</strong>, <strong>Terraform IaC</strong>, and 
+            <strong>Kubernetes (EKS)</strong> with automated fraud scoring and Prometheus observability.
+          </p>
+        </div>
+
+        <!-- Quick Stats Banner -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-3 min-w-[280px]">
+          <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Availability</span>
+            <div class="text-xl font-extrabold text-emerald-400 mt-0.5">99.995%</div>
+            <span class="text-[10px] text-slate-500">Zero-downtime SLA</span>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Throughput</span>
+            <div class="text-xl font-extrabold text-blue-400 mt-0.5">1,420 TPS</div>
+            <span class="text-[10px] text-slate-500">Sub-30ms p99 latency</span>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">K8s Pods</span>
+            <div class="text-xl font-extrabold text-purple-400 mt-0.5">3 / 3 Active</div>
+            <span class="text-[10px] text-slate-500">Auto-scalable to 10</span>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-800 p-3.5 rounded-2xl">
+            <span class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Deploy Strategy</span>
+            <div class="text-xl font-extrabold text-yellow-400 mt-0.5">Blue / Green</div>
+            <span class="text-[10px] text-slate-500">Instant rollback ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Pipeline Simulator -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800/80 shadow-2xl space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h2 class="text-xl sm:text-2xl font-bold text-white">Live CI/CD Pipeline Simulator</h2>
+          </div>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">
+            Simulate a production release commit by <strong>he99codes</strong> and watch the live streaming deployment logs.
+          </p>
+        </div>
+        <button id="runPipelineBtn" onclick="startPipelineSimulation()" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-blue-500/25 transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-play text-xs"></i>
+          Trigger Production Deployment
+        </button>
+      </div>
+
+      <!-- Pipeline Steps Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+        <div id="step-1" class="step-card bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl transition text-center space-y-1">
+          <div class="w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box">1</div>
+          <div class="text-xs font-semibold text-slate-200">Git Push</div>
+          <div class="text-[10px] text-slate-500 font-mono">SCM Hook</div>
+        </div>
+        <div id="step-2" class="step-card bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl transition text-center space-y-1">
+          <div class="w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box">2</div>
+          <div class="text-xs font-semibold text-slate-200">Security Audit</div>
+          <div class="text-[10px] text-slate-500 font-mono">PCI-DSS Lint</div>
+        </div>
+        <div id="step-3" class="step-card bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl transition text-center space-y-1">
+          <div class="w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box">3</div>
+          <div class="text-xs font-semibold text-slate-200">Unit Tests</div>
+          <div class="text-[10px] text-slate-500 font-mono">PyTest 6/6</div>
+        </div>
+        <div id="step-4" class="step-card bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl transition text-center space-y-1">
+          <div class="w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box">4</div>
+          <div class="text-xs font-semibold text-slate-200">Docker Build</div>
+          <div class="text-[10px] text-slate-500 font-mono">Multi-Stage</div>
+        </div>
+        <div id="step-5" class="step-card bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl transition text-center space-y-1">
+          <div class="w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box">5</div>
+          <div class="text-xs font-semibold text-slate-200">DockerHub</div>
+          <div class="text-[10px] text-slate-500 font-mono">Push v2.4.0</div>
+        </div>
+        <div id="step-6" class="step-card bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl transition text-center space-y-1">
+          <div class="w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box">6</div>
+          <div class="text-xs font-semibold text-slate-200">Ansible</div>
+          <div class="text-[10px] text-slate-500 font-mono">Config Mgmt</div>
+        </div>
+        <div id="step-7" class="step-card bg-slate-900/80 border border-slate-800 p-3.5 rounded-xl transition text-center space-y-1">
+          <div class="w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box">7</div>
+          <div class="text-xs font-semibold text-slate-200">Kubernetes</div>
+          <div class="text-[10px] text-slate-500 font-mono">Live Rollout</div>
+        </div>
+      </div>
+
+      <!-- Real-Time Terminal Output Window -->
+      <div class="rounded-2xl bg-[#0b0c14] border border-slate-800/90 shadow-2xl overflow-hidden font-mono text-xs">
+        <div class="bg-[#141724] px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+            <span class="text-slate-400 text-xs ml-2 font-sans font-medium">Jenkins CI/CD Pipeline Console • he99codes/payshield-devops</span>
+          </div>
+          <div id="pipelineStatusBadge" class="text-[11px] text-slate-400 font-sans">
+            Ready to trigger
+          </div>
+        </div>
+        <div id="terminalBody" class="p-4 space-y-1.5 h-64 overflow-y-auto text-slate-300">
+          <div class="text-slate-500"># System initialized. Click "Trigger Production Deployment" above to run the automated pipeline.</div>
+          <div class="text-slate-500"># Branch: main | Registry: he99codes/payshield-payment-api | Namespace: payshield-production</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Payment Gateway API Explorer & Architecture Explorer -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- API Explorer (5 cols) -->
+      <div class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-7 border border-slate-800/80 shadow-2xl space-y-4">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Live FinTech Sandbox</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono">POST /api/v1/transactions</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mt-1">Payment Transaction Tester</h3>
+          <p class="text-slate-400 text-xs">Simulate real-time payment authorization and automatic fraud risk evaluation.</p>
+        </div>
+
+        <form id="txForm" onsubmit="submitTransaction(event)" class="space-y-3 text-xs">
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Sender Account</label>
+            <input type="text" id="senderAcc" value="ACC-FINTECH-9014" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-blue-500" />
+          </div>
+          <div>
+            <label class="block text-slate-300 font-semibold mb-1">Recipient Account</label>
+            <input type="text" id="recipientAcc" value="ACC-MERCHANT-2841" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-blue-500" />
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Amount ($)</label>
+              <input type="number" id="txAmount" value="340.50" step="0.01" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-blue-500" />
+            </div>
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Currency</label>
+              <select id="txCurrency" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-blue-500">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="INR">INR (₹)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition shadow-lg shadow-emerald-600/20 text-xs flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-lock text-xs"></i>
+              Process & Authorize Payment
+            </button>
+          </div>
+        </form>
+
+        <!-- Response Container -->
+        <div class="space-y-1 pt-1">
+          <span class="text-[11px] font-semibold text-slate-400">Gateway Response Payload:</span>
+          <pre id="apiResponse" class="p-3 bg-[#0a0c13] border border-slate-800/80 rounded-xl text-[11px] font-mono text-emerald-400 overflow-x-auto max-h-44">
+{
+  "status": "READY",
+  "message": "Submit transaction above to test live endpoint"
+}</pre>
+        </div>
+      </div>
+
+      <!-- Architecture Explorer & Quick Deploy (7 cols) -->
+      <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-7 border border-slate-800/80 shadow-2xl space-y-5">
+        <div>
+          <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Multi-Tier Architecture</span>
+          <h3 class="text-xl font-bold text-white mt-1">End-to-End Enterprise Flow</h3>
+          <p class="text-slate-400 text-xs">How the PayShield FinTech microservice is provisioned, deployed, and scaled.</p>
+        </div>
+
+        <!-- Architecture Flow Visual -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center">
+              <i class="fa-solid fa-cloud"></i>
+            </div>
+            <h4 class="text-sm font-bold text-white">1. Terraform IaC</h4>
+            <p class="text-[11px] text-slate-400 leading-normal">
+              Provisions AWS VPC, 2 Availability Zones, Security Groups, and IAM roles for PCI compliance.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center">
+              <i class="fa-solid fa-gears"></i>
+            </div>
+            <h4 class="text-sm font-bold text-white">2. CI & Ansible</h4>
+            <p class="text-[11px] text-slate-400 leading-normal">
+              Jenkins executes PyTest, builds non-root Docker images, pushes to DockerHub, and orchestrates nodes via Ansible.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center">
+              <i class="fa-solid fa-dharmachakra"></i>
+            </div>
+            <h4 class="text-sm font-bold text-white">3. Kubernetes K8s</h4>
+            <p class="text-[11px] text-slate-400 leading-normal">
+              Zero-downtime Blue/Green rolling updates, Horizontal Pod Autoscaling (3 to 10 pods), and NodePort 30080.
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick 1-Command Local Hosting Box -->
+        <div class="bg-gradient-to-r from-slate-900 via-[#101424] to-slate-900 border border-blue-500/30 p-4 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-blue-300">Run Whole Platform Locally (1 Command):</span>
+            <span class="text-[10px] text-slate-400 font-mono">Docker Compose</span>
+          </div>
+          <div class="bg-[#0b0d17] p-2.5 rounded-xl border border-slate-800 flex items-center justify-between font-mono text-xs text-yellow-300">
+            <span>docker compose up -d</span>
+            <button onclick="copyCommand('docker compose up -d')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] rounded transition">
+              Copy
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            Starts the PayShield Payment Gateway API on port <code>5000</code> and this interactive showcase on port <code>8080</code>.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-800/80 text-center text-xs text-slate-500 space-y-2">
+    <div>
+      <strong>PayShield FinTech DevOps Platform</strong> • Developed & Maintained by <span class="text-slate-300 font-semibold">Priyanshu (he99codes)</span>
+    </div>
+    <div>
+      Licensed under MIT License • Designed for enterprise financial microservices and cloud-native reliability.
+    </div>
+  </footer>
+
+  <script>
+    // Pipeline Simulation Steps
+    const pipelineLogs = [
+      { step: 1, text: "[Stage 1/7] SCM Trigger: Webhook received from github.com/he99codes/payshield-devops (commit #7f20b81)...", color: "#89b4fa" },
+      { step: 1, text: " => Branch: main | Author: he99codes | Message: feat: configure high-availability payment pipeline", color: "#cdd6f4" },
+      { step: 2, text: "[Stage 2/7] Security & Compliance Audit: Running PCI-DSS v4 Static Analyzer...", color: "#89dceb" },
+      { step: 2, text: " => Checking for hardcoded secrets: 0 found.", color: "#a6e3a1" },
+      { step: 2, text: " => Python syntax validation (py_compile app/app.py): CLEAN.", color: "#a6e3a1" },
+      { step: 3, text: "[Stage 3/7] Automated Unit Testing: Executing PyTest suite on payment endpoints...", color: "#89dceb" },
+      { step: 3, text: " => test_payment_api.py::test_health_check PASSED [16%]", color: "#a6e3a1" },
+      { step: 3, text: " => test_payment_api.py::test_successful_transaction PASSED [50%]", color: "#a6e3a1" },
+      { step: 3, text: " => test_payment_api.py::test_fraud_flagged_transaction PASSED [83%]", color: "#a6e3a1" },
+      { step: 3, text: " => 6 passed in 0.83s. Code Quality Gate: PASSED.", color: "#a6e3a1" },
+      { step: 4, text: "[Stage 4/7] Docker Image Packaging: Building non-root container artifact...", color: "#f9e2af" },
+      { step: 4, text: " => Tagging: he99codes/payshield-payment-api:v2.4.0 (Base: python:3.11-slim)", color: "#cdd6f4" },
+      { step: 4, text: " => Multi-stage build completed (Image size: 124MB).", color: "#a6e3a1" },
+      { step: 5, text: "[Stage 5/7] Registry Push: Uploading signed artifact to DockerHub...", color: "#f9e2af" },
+      { step: 5, text: " => Pushed he99codes/payshield-payment-api:v2.4.0 (sha256:8b4a2e...)", color: "#a6e3a1" },
+      { step: 6, text: "[Stage 6/7] Ansible Orchestration: Running deploy-payment-gateway.yml...", color: "#cba6f7" },
+      { step: 6, text: " => Target: payment_docker_hosts & k8s nodes (ok=4, changed=2, failed=0)", color: "#a6e3a1" },
+      { step: 7, text: "[Stage 7/7] Kubernetes Continuous Deployment: Rolling update on payshield-production...", color: "#89dceb" },
+      { step: 7, text: " => deployment.apps/payshield-payment-api image updated.", color: "#a6e3a1" },
+      { step: 7, text: " => Waiting for rollout to finish: 3 of 3 updated replicas are available...", color: "#cdd6f4" },
+      { step: 7, text: " => deployment \"payshield-payment-api\" successfully rolled out!", color: "#a6e3a1" },
+      { step: 7, text: "✓ PIPELINE STATUS: SUCCESS | Zero-downtime release completed in 32s!", color: "#50fa7b" }
+    ];
+
+    let isRunning = false;
+
+    function startPipelineSimulation() {
+      if (isRunning) return;
+      isRunning = true;
+      const btn = document.getElementById("runPipelineBtn");
+      const statusBadge = document.getElementById("pipelineStatusBadge");
+      const terminal = document.getElementById("terminalBody");
+
+      btn.disabled = true;
+      btn.classList.add("opacity-50", "cursor-not-allowed");
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-xs"></i> Deploying...`;
+      statusBadge.innerHTML = `<span class="text-blue-400 font-bold">PIPELINE RUNNING...</span>`;
+      terminal.innerHTML = "";
+
+      // Reset step cards
+      document.querySelectorAll(".step-card").forEach(el => {
+        el.classList.remove("step-active", "step-completed");
+        el.querySelector(".icon-box").className = "w-7 h-7 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400 icon-box";
+      });
+
+      let logIndex = 0;
+      function streamLog() {
+        if (logIndex < pipelineLogs.length) {
+          const log = pipelineLogs[logIndex];
+          
+          // Update visual step cards
+          const stepCard = document.getElementById("step-" + log.step);
+          if (stepCard && !stepCard.classList.contains("step-completed")) {
+            // mark previous steps completed
+            for (let i = 1; i < log.step; i++) {
+              const prev = document.getElementById("step-" + i);
+              if (prev) {
+                prev.classList.remove("step-active");
+                prev.classList.add("step-completed");
+                prev.querySelector(".icon-box").className = "w-7 h-7 mx-auto rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-xs font-bold icon-box";
+                prev.querySelector(".icon-box").innerHTML = "✓";
+              }
+            }
+            stepCard.classList.add("step-active");
+            stepCard.querySelector(".icon-box").className = "w-7 h-7 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold icon-box";
+          }
+
+          // Append line to terminal
+          const lineEl = document.createElement("div");
+          lineEl.style.color = log.color;
+          lineEl.innerText = log.text;
+          terminal.appendChild(lineEl);
+          terminal.scrollTop = terminal.scrollHeight;
+
+          logIndex++;
+          setTimeout(streamLog, 300);
+        } else {
+          // Final step completed
+          const lastStep = document.getElementById("step-7");
+          if (lastStep) {
+            lastStep.classList.remove("step-active");
+            lastStep.classList.add("step-completed");
+            lastStep.querySelector(".icon-box").className = "w-7 h-7 mx-auto rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-xs font-bold icon-box";
+            lastStep.querySelector(".icon-box").innerHTML = "✓";
+          }
+          btn.disabled = false;
+          btn.classList.remove("opacity-50", "cursor-not-allowed");
+          btn.innerHTML = `<i class="fa-solid fa-rotate-right text-xs"></i> Re-trigger Pipeline`;
+          statusBadge.innerHTML = `<span class="text-emerald-400 font-bold">✓ DEPLOYMENT SUCCEEDED</span>`;
+          isRunning = false;
+        }
+      }
+
+      streamLog();
+    }
+
+    // Payment Sandbox Simulation
+    function submitTransaction(e) {
+      e.preventDefault();
+      const amount = parseFloat(document.getElementById("txAmount").value);
+      const currency = document.getElementById("txCurrency").value;
+      const sender = document.getElementById("senderAcc").value;
+      const recipient = document.getElementById("recipientAcc").value;
+      const respBox = document.getElementById("apiResponse");
+
+      const isFraud = amount > 50000;
+      const txId = "tx_" + Math.random().toString(36).substring(2, 10);
+      const authCode = "AUTH-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+      
+      const payload = {
+        success: true,
+        transaction: {
+          transaction_id: txId,
+          amount: amount,
+          currency: currency,
+          sender_account: sender,
+          recipient_account: recipient,
+          status: isFraud ? "FLAGGED_FOR_REVIEW" : "AUTHORIZED",
+          authorization_code: authCode,
+          risk_score: isFraud ? 94 : 8,
+          fraud_checks: isFraud ? "SUSPICIOUS_HIGH_VOLUME_DETECTED" : "PASSED_PCI_CRITERIA",
+          timestamp: new Date().toISOString(),
+          cluster_node: "payshield-k8s-worker-" + Math.floor(Math.random() * 3 + 1),
+          service_maintainer: "he99codes"
+        }
+      };
+
+      respBox.innerText = JSON.stringify(payload, null, 2);
+      if (isFraud) {
+        respBox.className = "p-3 bg-[#0a0c13] border border-amber-500/40 rounded-xl text-[11px] font-mono text-amber-400 overflow-x-auto max-h-44";
+      } else {
+        respBox.className = "p-3 bg-[#0a0c13] border border-emerald-500/40 rounded-xl text-[11px] font-mono text-emerald-400 overflow-x-auto max-h-44";
+      }
+    }
+
+    function copyCommand(cmd) {
+      navigator.clipboard.writeText(cmd);
+      alert("Copied to clipboard: " + cmd);
+    }
+  </script>
+</body>
+</html>

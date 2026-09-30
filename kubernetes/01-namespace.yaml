@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: payshield-production
+  labels:
+    environment: production
+    domain: fintech-payments
+    maintainer: he99codes

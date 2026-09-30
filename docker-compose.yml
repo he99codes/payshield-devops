@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # PayShield FinTech Core Payment Gateway Microservice
+  payment-api:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: he99codes/payshield-payment-api:v2.4.0
+    container_name: payshield-payment-api
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - APP_ENV=production
+      - APP_VERSION=v2.4.0
+      - PORT=5000
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+    networks:
+      - payshield-net
+
+  # In-memory Redis Cache for Idempotency & Rate Limiting
+  redis:
+    image: redis:7-alpine
+    container_name: payshield-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - payshield-net
+
+  # Interactive Web Showcase & Live Pipeline Simulator Portal
+  showcase-portal:
+    image: nginx:alpine
+    container_name: payshield-showcase-portal
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./showcase:/usr/share/nginx/html:ro
+    networks:
+      - payshield-net
+
+networks:
+  payshield-net:
+    driver: bridge

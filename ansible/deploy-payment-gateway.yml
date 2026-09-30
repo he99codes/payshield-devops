@@ -1,0 +1,65 @@
+---
+# ==============================================================================
+# PayShield FinTech - Continuous Deployment Playbook
+# Image: he99codes/payshield-payment-api
+# Target: payment_docker_hosts & kubernetes_nodes
+# ==============================================================================
+- name: Deploy PayShield Payment Gateway Container
+  hosts: payment_docker_hosts
+  become: true
+  vars:
+    docker_image: "he99codes/payshield-payment-api:v2.4.0"
+    container_name: "payshield-payment-api"
+    host_port: 5000
+    container_port: 5000
+
+  tasks:
+    - name: Pull latest production image from registry
+      docker_image:
+        name: "{{ docker_image }}"
+        source: pull
+        force_source: true
+
+    - name: Stop existing container (if running)
+      docker_container:
+        name: "{{ container_name }}"
+        state: stopped
+      ignore_errors: true
+
+    - name: Remove stale container
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+      ignore_errors: true
+
+    - name: Run PayShield Payment Gateway container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "{{ host_port }}:{{ container_port }}"
+        env:
+          APP_ENV: "production"
+          APP_VERSION: "v2.4.0"
+          SERVICE_NAME: "payshield-core"
+        log_driver: "json-file"
+        log_options:
+          max-size: "50m"
+          max-file: "5"
+
+    - name: Wait for API health endpoint to return 200 OK
+      uri:
+        url: "http://localhost:{{ host_port }}/api/v1/health"
+        method: GET
+        status_code: 200
+        return_content: true
+      register: health_check
+      retries: 5
+      delay: 3
+      until: health_check.status == 200
+
+    - name: Output deployment verification
+      debug:
+        msg: "PayShield Payment Gateway successfully deployed and verified healthy on {{ inventory_hostname }}!"

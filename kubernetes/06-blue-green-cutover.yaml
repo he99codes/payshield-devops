@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payshield-blue
+  namespace: payshield-production
+  labels:
+    app: payshield-core
+    version: blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: payshield-core
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: payshield-core
+        version: blue
+    spec:
+      containers:
+      - name: payment-api
+        image: he99codes/payshield-payment-api:v2.3.9
+        ports:
+        - containerPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payshield-green
+  namespace: payshield-production
+  labels:
+    app: payshield-core
+    version: green
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: payshield-core
+      version: green
+  template:
+    metadata:
+      labels:
+        app: payshield-core
+        version: green
+    spec:
+      containers:
+      - name: payment-api
+        image: he99codes/payshield-payment-api:v2.4.0
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payshield-active-traffic-router
+  namespace: payshield-production
+spec:
+  selector:
+    app: payshield-core
+    version: green # Switched to Green (Active Production)
+  ports:
+  - port: 80
+    targetPort: 5000
